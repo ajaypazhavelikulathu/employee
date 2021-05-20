@@ -8,9 +8,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
-import com.scg.employee.Exception.EmployeeNotFoundException;
 import com.scg.employee.dao.EmployeeDAO;
 import com.scg.employee.dao.entity.Employee;
+import com.scg.employee.exception.ApiException;
+import com.scg.employee.exception.errorcode.ErrorCode;
 import com.scg.employee.mapping.EmployeeRequestMapper;
 import com.scg.employee.repository.EmployeeRepository;
 import com.scg.employee.vo.EmployeeVo;
@@ -99,16 +100,19 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	@Override
 	public EmployeeVo getEmployeeById(final int id) {
 
-		try {
-			final Employee employee = employeeRepository.findById(id)
-					.orElseThrow(() -> new EmployeeNotFoundException("No Employe found in this id"));
+//		try {
+//
+//			final int a = 5 / 0;
+//
+//		} catch (final ArithmeticException e) {
+//			throw new ApiException(ErrorCode.DIVISION_BY_ZERO, e);
+//		}
 
-			return employeeRequestMapper.toVO(employee);
-		} catch (final Exception e) {
-			log.error("Empoloyee not found", e);
-			System.out.println("Employee not found" + e);
-		}
-		return null;
+		final Employee employee = employeeRepository.findById(id)
+				.orElseThrow(() -> new ApiException(ErrorCode.EMPLOYEE_NOT_FOUND));
+
+		return employeeRequestMapper.toVO(employee);
+
 	}
 
 	@Override
@@ -121,36 +125,14 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	public EmployeeVo updateEmployeeById(final EmployeeVo employeeVo) {
 		final Employee employee = employeeRequestMapper.toEntity(employeeVo);
 
-		try {
-			final Employee existingEmployee = employeeRepository.findById(employee.getId())
-					.orElseThrow(() -> new EmployeeNotFoundException("No Employe found in this id"));
+		final Employee existingEmployee = employeeRepository.findById(employee.getId())
+				.orElseThrow(() -> new ApiException(ErrorCode.EMPLOYEE_NOT_FOUND));
 
-			existingEmployee.setFirstName(employee.getFirstName());
-			existingEmployee.setLastName(employee.getLastName());
-			existingEmployee.setEmail(employee.getEmail());
-//			addAuditDetailsUpdate(existingEmployee);
-			return employeeRequestMapper.toVO(employeeRepository.save(existingEmployee));
-
-		} catch (final Exception e) {
-//			log.error("User not found", e);
-			System.out.println("user not found" + e);
-		}
-		return null;
+		existingEmployee.setFirstName(employee.getFirstName());
+		existingEmployee.setLastName(employee.getLastName());
+		existingEmployee.setEmail(employee.getEmail());
+		return employeeRequestMapper.toVO(employeeRepository.save(existingEmployee));
 
 	}
-
-//	public Audit addAuditDetailsInsert() {
-//		final Audit audit = new Audit();
-//		audit.setCreatedTimestamp(LocalDateTime.now());
-//		audit.setCreatedBy("ajay");
-//		return audit;
-//
-//	}
-//
-//	public void addAuditDetailsUpdate(final Employee employee) {
-//		employee.getAudit().setLastUpdatedBy("ajith");
-//		employee.getAudit().setLastUpdatedTimestamp(LocalDateTime.now());
-//
-//	}
 
 }

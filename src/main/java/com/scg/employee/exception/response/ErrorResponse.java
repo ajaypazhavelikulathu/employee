@@ -1,4 +1,6 @@
-package com.scg.employee.Exception.response;
+package com.scg.employee.exception.response;
+
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 
@@ -10,10 +12,11 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ErrorResponse {
-	private final HttpStatus status = HttpStatus.OK;
+	private HttpStatus status = HttpStatus.OK;
 	private String errorCode;
 	private String message;
 	private String detail;
 	private String exception;
+	List<String> errorMessages;
 
 }

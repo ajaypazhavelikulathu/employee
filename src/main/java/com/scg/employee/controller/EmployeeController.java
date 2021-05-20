@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.scg.employee.Exception.EmployeeNotFoundException;
 import com.scg.employee.advice.TrackExecutionTime;
 import com.scg.employee.service.EmployeeService;
 import com.scg.employee.vo.EmployeeVo;
@@ -44,7 +43,7 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/id/{id}")
-	public EmployeeVo getEmployeeById(@PathVariable final int id) throws EmployeeNotFoundException {
+	public EmployeeVo getEmployeeById(@PathVariable final int id) {
 		return employeeService.getEmployeeById(id);
 
 	}
@@ -61,7 +60,7 @@ public class EmployeeController {
 	}
 
 	@PutMapping
-	public EmployeeVo updateEmployeeById(@RequestBody final EmployeeVo employeeVo) throws EmployeeNotFoundException {
+	public EmployeeVo updateEmployeeById(@RequestBody final EmployeeVo employeeVo) {
 		return employeeService.updateEmployeeById(employeeVo);
 	}
 

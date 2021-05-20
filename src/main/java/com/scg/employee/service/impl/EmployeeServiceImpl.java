@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.scg.employee.Exception.EmployeeNotFoundException;
 import com.scg.employee.dao.EmployeeDAO;
 import com.scg.employee.service.EmployeeService;
 import com.scg.employee.vo.EmployeeVo;
@@ -33,7 +32,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public EmployeeVo getEmployeeById(final int id) throws EmployeeNotFoundException {
+	public EmployeeVo getEmployeeById(final int id) {
 		return employeeDAO.getEmployeeById(id);
 	}
 
@@ -48,7 +47,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public EmployeeVo updateEmployeeById(final EmployeeVo employeeVo) throws EmployeeNotFoundException {
+	public EmployeeVo updateEmployeeById(final EmployeeVo employeeVo) {
 		return employeeDAO.updateEmployeeById(employeeVo);
 
 	}

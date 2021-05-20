@@ -1,4 +1,4 @@
-package com.scg.employee.Exception.errorcode;
+package com.scg.employee.exception.errorcode;
 
 import java.io.Serializable;
 
@@ -10,6 +10,6 @@ public interface BaseCode extends Serializable {
 
 	String getMessage();
 
-	String getMessageKey();
+//	String getMessageKey();
 
 }

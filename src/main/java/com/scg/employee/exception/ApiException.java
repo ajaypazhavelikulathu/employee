@@ -1,6 +1,6 @@
-package com.scg.employee.Exception;
+package com.scg.employee.exception;
 
-import com.scg.employee.Exception.errorcode.BaseCode;
+import com.scg.employee.exception.errorcode.BaseCode;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +17,7 @@ public class ApiException extends RuntimeException {
 		super(errorCode.getMessage());
 		this.exception = new RuntimeException(errorCode.getMessage());
 		this.errorCode = errorCode;
-		this.errorCodeString = errorCodeString.toString();
+		this.errorCodeString = errorCode.toString();
 
 	}
 
@@ -25,7 +25,7 @@ public class ApiException extends RuntimeException {
 		super(String.join("_", errorCode.getMessage(), exception.getMessage()), exception);
 		this.exception = exception;
 		this.errorCode = errorCode;
-		this.errorCodeString = errorCodeString.toString();
+		this.errorCodeString = errorCode.toString();
 
 	}
 

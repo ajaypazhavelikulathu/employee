@@ -1,11 +1,12 @@
-package com.scg.employee.Exception.errorcode;
+package com.scg.employee.exception.errorcode;
 
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum ErrorCode implements BaseCode {
 
-	EMPLOYEE_NOT_FOUND("No Employee in this id"), DEPARTMENT_NOT_FOUND("No Department in this id");
+	EMPLOYEE_NOT_FOUND("No Employee in this id"), DEPARTMENT_NOT_FOUND("No Department in this id"),
+	DIVISION_BY_ZERO("Division with zero error");
 
 	private String message;
 
@@ -22,14 +23,13 @@ public enum ErrorCode implements BaseCode {
 
 	@Override
 	public String getMessage() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.message;
 	}
 
-	@Override
-	public String getMessageKey() {
-		return null;
-
-	}
+//	@Override
+//	public String getMessageKey() {
+//		return null;
+//
+//	}
 
 }
