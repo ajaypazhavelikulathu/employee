@@ -1,7 +1,5 @@
 package com.scg.employee.exception.response;
 
-import java.util.List;
-
 import org.springframework.http.HttpStatus;
 
 import lombok.Getter;
@@ -17,6 +15,6 @@ public class ErrorResponse {
 	private String message;
 	private String detail;
 	private String exception;
-	List<String> errorMessages;
+//	List<String> errorMessages;
 
 }
