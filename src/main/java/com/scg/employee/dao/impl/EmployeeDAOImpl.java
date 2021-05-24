@@ -12,7 +12,6 @@ import com.scg.employee.dao.EmployeeDAO;
 import com.scg.employee.dao.entity.Employee;
 import com.scg.employee.exception.ApiException;
 import com.scg.employee.exception.errorcode.ErrorCode;
-import com.scg.employee.fiegn.proxy.AttendanceServiceProxy;
 import com.scg.employee.mapping.EmployeeRequestMapper;
 import com.scg.employee.repository.EmployeeRepository;
 import com.scg.employee.vo.EmployeeVo;
@@ -32,9 +31,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	@Autowired
 
 	private EmployeeRequestMapper employeeRequestMapper;
-
-	@Autowired
-	private AttendanceServiceProxy attendanceServiceProxy;
 
 //	@Autowired
 //	DepartmentRepository departmentRepository;
@@ -118,9 +114,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 		final Employee employee = employeeRepository.findById(id)
 				.orElseThrow(() -> new ApiException(ErrorCode.EMPLOYEE_NOT_FOUND));
-
-		final String a = attendanceServiceProxy.getEmployeeAttendanceById(1);
-		log.info(a);
 
 		return employeeRequestMapper.toVO(employee);
 

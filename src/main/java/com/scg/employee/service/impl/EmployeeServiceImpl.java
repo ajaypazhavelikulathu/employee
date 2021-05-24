@@ -6,14 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.scg.employee.dao.EmployeeDAO;
+import com.scg.employee.fiegn.proxy.AttendanceServiceProxy;
 import com.scg.employee.service.EmployeeService;
 import com.scg.employee.vo.EmployeeVo;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
 	@Autowired
 	private EmployeeDAO employeeDAO;
+	@Autowired
+	private AttendanceServiceProxy attendanceServiceProxy;
 
 	@Override
 	public EmployeeVo saveEmployee(final EmployeeVo employeeVo) {
@@ -33,6 +39,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public EmployeeVo getEmployeeById(final int id) {
+
+		final String a = attendanceServiceProxy.getEmployeeAttendanceById(1);
+		log.info(a);
 		return employeeDAO.getEmployeeById(id);
 	}
 
