@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.scg.employee.advice.TrackExecutionTime;
+import com.scg.employee.dao.entity.Department;
+import com.scg.employee.repository.EmployeeRepository;
 import com.scg.employee.service.EmployeeService;
 import com.scg.employee.vo.EmployeeVo;
 
@@ -21,6 +23,8 @@ import com.scg.employee.vo.EmployeeVo;
 public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeService;
+	@Autowired
+	private EmployeeRepository employeeRepository;
 
 	@PostMapping
 	public EmployeeVo saveEmployee(@RequestBody final EmployeeVo employeeVo) {
@@ -47,6 +51,16 @@ public class EmployeeController {
 		return employeeService.getEmployeeById(id);
 
 	}
+	
+	
+	
+	@GetMapping("/employee/{id}")
+	public List<String> getDepartmentByEmployeeById(@PathVariable final int id) {
+		return employeeRepository.getDepartmentByEmployeeById(id);
+
+	}
+	
+	
 
 	@GetMapping("/name/{name}")
 	public List<EmployeeVo> findByName(@PathVariable final String name) {

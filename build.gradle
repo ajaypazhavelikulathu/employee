@@ -36,9 +36,7 @@ implementation('org.mapstruct:mapstruct:1.4.2.Final')
 	implementation 'org.apache.commons:commons-lang3:3.11'
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
 	
-// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-feign
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
-//implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '3.0.2'
 	
 	
 	
